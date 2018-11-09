@@ -10,6 +10,7 @@ def myfunc(myarg):
     print("my function", myarg)
 
 
+# decorate recursive function, nothing special about it, just example
 @mydecorator
 def recursive_func(n):
     print("Original function")
