@@ -1,21 +1,31 @@
+# Example of timing with class decorator
+# is a bit more complicated then with a simple
+
+
 def time_this(original_function):
     print("decorating")
 
     def new_function(*args, **kwargs):
         print("starting timer")
         import datetime
+        # save time before execution
         before = datetime.datetime.now()
+        # execute function
         x = original_function(*args, **kwargs)
+        # save time after execution
         after = datetime.datetime.now()
+        # print timing
         print("Elapsed Time = {0}".format(after - before))
         return x
-
     return new_function
 
 
+# class as an input for this function, which we will use as a decorator later
 def time_all_class_methods(Cls):
+    # new class (derived from object for python 2.x and without it for 3.x)
     class NewCls(object):
         def __init__(self, *args, **kwargs):
+            # same input class on init
             self.oInstance = Cls(*args, **kwargs)
 
         def __getattribute__(self, s):
@@ -40,7 +50,8 @@ def time_all_class_methods(Cls):
     return NewCls
 
 
-# now lets make a dummy class to test it out on:
+# now lets make a dummy class to test it out on
+# in this case decorator will decorate all functions of the class!
 
 @time_all_class_methods
 class Foo(object):
@@ -63,6 +74,7 @@ class Foo(object):
         print("exiting c")
 
 
+# create instance of a class, then call all functions to see how it works
 oF = Foo()
 oF.a()
 oF.b()

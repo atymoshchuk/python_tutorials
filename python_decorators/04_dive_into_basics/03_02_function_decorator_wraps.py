@@ -3,6 +3,13 @@ from functools import wraps
 
 def mydecorator(f):
     @wraps(f)
+    # This is a convenience function for invoking update_wrapper() as
+    #  a function decorator when defining a wrapper function.
+    # It is equivalent to
+    # partial(update_wrapper, wrapped=wrapped, assigned=assigned, updated=updated)
+    # More information: https://docs.python.org/3.7/library/functools.html
+    # It will actually fix the previous issue with wrong function's name
+    # and docstring. Advice: always use functools.wraps decorator.
     def wrapped(*args, **kwargs):
         print("Before decorated function")
         r = f(*args, **kwargs)
