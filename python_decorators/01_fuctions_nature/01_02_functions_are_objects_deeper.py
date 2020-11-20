@@ -4,14 +4,14 @@ def say_hello(name):
 
 
 # call the function with argument
-say_hello("EuroPython 2018")
+say_hello("Conference")
 
 # assign function as a FCO (first-class object) to a variable
 my_func = say_hello
 
 # call the function, should do exactly the same as calling the original
 # function, as it's pointing to the same function
-my_func("Awesome EuroPython 2018")
+my_func("Awesome Conference")
 
 # delete say_hello variable, not a function!
 del say_hello
